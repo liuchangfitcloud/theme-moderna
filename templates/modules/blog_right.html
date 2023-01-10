@@ -1,0 +1,37 @@
+<div class="col-lg-4" th:fragment="selectTgOrCg(tagName,categoryName)">
+    <div class="sidebar">
+        <h3 class="sidebar-title" style="display: none;">搜索</h3>
+        <div class="sidebar-item search-form" style="display: none;">
+            <form action="">
+                <input type="text">
+                <button type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div><!-- End sidebar search formn-->
+        <h3 class="sidebar-title" th:text="${theme.config.blog.cg_name}">分类</h3>
+        <div class="sidebar-item categories" th:with="categories = ${categoryFinder.listAll()}">
+            <ul>
+                <li th:each="cg : ${categories}">
+                    <a th:href="@{${cg.status.permalink}}" th:class="${categoryName} == ${cg.spec.displayName} ? 'active': ''"
+                        th:text="${cg.spec.displayName} + '(' + ${cg.status.postCount} +')'"></a>
+                </li>
+            </ul>
+        </div><!-- End sidebar categories-->
+        <h3 class="sidebar-title" th:text="${theme.config.blog.new_it_name}">最新发布</h3>
+        <div class="sidebar-item recent-posts" th:with="posts = ${postFinder.list(1,theme.config.blog.new_it_num)}">
+            <div class="post-item clearfix" th:each="post : ${posts}">
+                <img alt="" th:src="@{${post.spec.cover}}">
+                <h4><a th:href="@{${post.status.permalink}}" th:text="${post.spec.title}"></a></h4>
+                <time datetime="2020-01-01" th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}"></time>
+            </div>
+        </div><!-- End sidebar recent posts-->
+
+        <h3 class="sidebar-title" th:text="${theme.config.blog.tg_name}">标签</h3>
+        <div class="sidebar-item tags" th:with="tags = ${tagFinder.listAll()}">
+            <ul>
+                <li th:each="tg : ${tags}"><a
+                        th:class="${tg.spec.displayName} == ${tagName} ? 'active' : ''"
+                        th:href="${tg.status.permalink}" th:text="${tg.spec.displayName}"></a></li>
+            </ul>
+        </div><!-- End sidebar tags-->
+    </div><!-- End sidebar -->
+</div><!-- End blog sidebar -->

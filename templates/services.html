@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{modules/import}" />
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <th:block th:replace="~{modules/header::goPage(${singlePage.spec.slug})}" />
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Our Services Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 th:text="${singlePage.spec.title}"></h2>
+          <ol>
+            <li><a href="/">首页</a></li>
+            <li th:text="${singlePage.spec.title}"></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Our Services Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section class="services" th:if="${theme.config.service.show_service}">
+      <div class="container">
+
+        <div class="row" th:with="srSize = ${#arrays.length(theme.config.service.service_items)}">
+          <div th:each="sr,srStat:${theme.config.service.service_items}"
+            th:class="'col-lg-'+ 12/${srSize} + ' col-md-6 d-flex align-items-stretch'"
+            th:data-aos-delay="${srStat.index}*100" data-aos="fade-up">
+            <div class="icon-box-pink icon-box">
+              <div class="icon"><i th:class="${sr.icon} + ' bx'"></i></div>
+              <h4 class="title" th:text="${sr.title}"></h4>
+              <p class="description" th:text="${sr.desc}"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Why Us Section ======= -->
+    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200"
+      th:if="${theme.config.service.show_why_us}">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6 video-box">
+            <img th:src="${theme.config.service.why_bg_img}" class="img-fluid" alt="">
+            <a th:if="${!#strings.isEmpty(theme.config.service.why_video_url)}"
+              th:href="${theme.config.service.why_video_url}" class="venobox play-btn mb-4" data-vbtype="video"
+              data-autoplay="true"></a>
+          </div>
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+
+            <div class="icon-box" th:each="it : ${theme.config.service.why_us_items}">
+              <div class="icon"><i th:class="${it.icon} + ' bx'"></i></div>
+              <h4 class="title" th:text="${it.title}"></h4>
+              <p class="description" th:text="${it.desc}"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= Service Details Section ======= -->
+    <section class="service-details" th:if="${theme.config.service.show_card}">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up"
+            th:each="it : ${theme.config.service.card_itmes}">
+            <div class="card">
+              <div class="card-img">
+                <img th:src="@{${it.img}}" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a th:href="@{${it.url}}"><span th:text="${it.title}"></span></a></h5>
+                <p class="card-text" th:text="${it.desc}"></p>
+                <div class="read-more"><a th:href="@{${it.url}}"><i class="bi bi-arrow-right"></i>查看更多</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Service Details Section -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section class="pricing section-bg" data-aos="fade-up" th:if="${theme.config.service.show_price}">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>价格</h2>
+          <p th:text="${theme.config.service.price_desc}">诚信经营，童叟无欺！</p>
+        </div>
+
+        <div class="row no-gutters">
+          <div th:each="it,itStat : ${theme.config.service.price_items}"
+            th:class="${itStat.index} == 1 ? 'col-lg-4 box featured' : 'col-lg-4 box'">
+            <h3 th:text="${it.name}"></h3>
+            <h4 th:text="${it.num}"></h4>
+            <ul th:utext="${it.desc}">
+
+            </ul>
+            <a th:href="${it.btn_url}" class="get-started-btn" th:text="${it.btn_name}"></a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <th:block th:replace="~{modules/footer}" />
+  <!-- End Footer -->
+</body>
+
+</html>

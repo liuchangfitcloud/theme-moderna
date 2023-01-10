@@ -1,0 +1,893 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: theme-moderna-setting
+spec:
+  forms:
+    - group: home
+      label: 首页
+      formSchema:
+        - $formkit: repeater
+          name: carousel
+          label: 轮播块
+          value: 
+            - title: MeterSphere
+              desc: MeterSphere 是一站式的开源持续测试平台，遵循 GPL v3 开源许可协议，涵盖测试跟踪、接口测试、UI 测试和性能测试等功能，全面兼容 JMeter、Selenium 等主流开源标准，有效助力开发和测试团队充分利用云弹性进行高度可扩展的自动化测试，加速高质量的软件交付。
+              url: https://metersphere.io
+            - title: DataEase
+              desc: DataEase 是开源的数据可视化分析工具，帮助用户快速分析数据并洞察业务趋势，从而实现业务的改进与优化。DataEase 支持丰富的数据源连接，能够通过拖拉拽方式快速制作图表，并可以方便地与他人分享。
+              url: https://dataease.io
+            - title: JumpServer
+              desc: JumpServer 是广受欢迎的开源堡垒机，是符合 4A 规范的专业运维安全审计系统。改变世界，从一点点开始。
+              url: https://www.jumpserver.org
+            - title: KubeOperator
+              desc: KubeOperator 是一个开源的轻量级 Kubernetes 发行版，专注于帮助企业规划、部署和运营生产级别的 Kubernetes 集群。
+              url: https://kubeoperator.io 
+            - title: Halo
+              desc: 好用又强大的开源建站工具。
+              url: https://halo.run      
+          children:
+            - $formkit: text
+              name: title
+              label: 标题
+              value: 
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: 
+            - $formkit: url
+              name: url
+              label: 跳转地址
+              value:  
+        - $formkit: attachment
+          name: carousel_bg_img
+          label: 轮播块背景图片
+          value: /themes/moderna-template/assets/img/hero-bg.jpg
+        - $formkit: radio
+          name: show_card
+          id: show_home_card
+          key: show_home_card
+          label: 显示卡片块
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: repeater
+          if: "$get(show_home_card).value"
+          name: service
+          label: 企业文化
+          help: 必须是四个的排版 目前不支持其他的
+          value: 
+            - icon: bxl-dribbble
+              title: 平等
+              desc: 公司是我们共同的老板
+            - icon: bx-file
+              title: 价值
+              desc: 软件用起来才有价值，才有改进的机会
+            - icon: bx-tachometer
+              title: 求真
+              desc: 不断求真，坚持有所不为有所为
+            - icon: bx-world
+              title: 担当
+              desc: 做问题的终结者，而不是转发者和抱怨者  
+          children:
+            - $formkit: text
+              name: icon
+              label: 图标
+              value: 
+              help: 选择boxicons的icon样式
+            - $formkit: text
+              name: title
+              label: 标题
+              value: 
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: 
+        - $formkit: radio
+          name: show_why_us
+          id: show_home_why_us
+          key: show_home_why_us
+          label: 显示介绍块
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: attachment
+          if: "$get(show_home_why_us).value"
+          name: why_bg_img
+          label: 介绍公司背景图片
+          value: /themes/moderna-template/assets/img/why-us.jpg
+        - $formkit: url
+          if: "$get(show_home_why_us).value"
+          name: why_video_url
+          label: 视频地址
+          value: 
+        - $formkit: repeater
+          if: "$get(show_home_why_us).value"
+          name: why_us_items
+          label: 介绍条目
+          value: 
+            - icon: bx-fingerprint
+              title: 核心价值观
+              desc: 软件用起来才有价值，才有改进的机会！
+            - icon: bx-world
+              title: 加入我们
+              desc: 为数字经济时代创造好软件，一起改变世界！
+          children:
+            - $formkit: text
+              name: icon
+              label: 图标
+              value: 
+              help: 选择boxicons的icon样式
+            - $formkit: text
+              name: title
+              label: 标题
+              value: 
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: 
+        - $formkit: radio
+          name: show_features
+          id: show_home_features
+          key: show_home_features
+          label: 显示特点块
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: text
+          if: "$get(show_home_features).value"
+          name: features_title
+          label: 标题
+          value: 优势
+        - $formkit: text
+          if: "$get(show_home_features).value"
+          name: features_desc
+          label: 描述
+          value: 我们有最强的团队、非凡的执行力和团结的凝聚力，我们也必将成为世界一流的软件服务公司。
+        - $formkit: repeater
+          if: "$get(show_home_features).value"
+          name: features_items
+          label: 优势条目
+          value: 
+            - img: /themes/moderna-template/assets/img/features-1.svg
+              title: 努力成为世界第一
+              desc: 我们坚信我们将超越世界上所有的公司
+              items:
+                - desc: 服务第一
+                - desc: 质量第一
+                - desc: 福利第一
+            - img: /themes/moderna-template/assets/img/features-2.svg
+              title: 努力成为世界第一
+              desc: 我们坚信我们将超越世界上所有的公司
+              items:
+                - desc: 服务第一
+                - desc: 质量第一
+                - desc: 福利第一
+            - img: /themes/moderna-template/assets/img/features-3.svg
+              title: 努力成为世界第一
+              desc: 我们坚信我们将超越世界上所有的公司
+              items:
+                - desc: 服务第一
+                - desc: 质量第一
+                - desc: 福利第一
+            - img: /themes/moderna-template/assets/img/features-4.svg
+              title: 努力成为世界第一
+              desc: 我们坚信我们将超越世界上所有的公司
+              items:
+                - desc: 服务第一
+                - desc: 质量第一
+                - desc: 福利第一            
+          children: 
+            - $formkit: attachment
+              name: img
+              label: 图片
+              value: 
+            - $formkit: text
+              name: title
+              label: 标题
+              value:
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: 
+            - $formkit: repeater
+              name: items
+              label: 描述条目
+              value: []
+              children:
+                - $formkit: text
+                  name: desc
+                  label: 描述
+                  value: ""   
+    - group: about
+      label: 关于我们
+      formSchema:
+        - $formkit: radio
+          help: 这个主要是用关于我们那个自定义模版下面的配置注意啦
+          name: show
+          id: show_about
+          key: show_about
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false  
+          label: 是否显示
+          value: false
+        - $formkit: singlePageSelect
+          if: "$get(show_about).value"
+          name: page
+          label: 选择自定义界面
+          validation: "required"
+          value: 
+          help: 必须选择关于我们模版的自定义页面,否则下面的配置将会失效。
+        - $formkit: attachment
+          if: "$get(show_about).value"
+          name: header_img
+          label: 顶部图片
+          value: /themes/moderna-template/assets/img/about.jpg
+        - $formkit: text
+          if: "$get(show_about).value"
+          name: header_title
+          label: 顶部标题
+          value: 软件用起来才有价值
+        - $formkit: text
+          if: "$get(show_about).value"
+          name: header_desc
+          label: 顶部描述
+          value: 愿所有用户都能将我们的软件使用起来，一起将软件功能进行完善，为了成熟的软件生态而自强不息！
+        - $formkit: repeater
+          if: "$get(show_about).value"
+          name: header_desc_items
+          label: 顶部描述条目
+          value: 
+            - desc: 通过开源形态构建软件版本迭代体系发展。
+            - desc: 用户反馈需求进行快速迭代更新。
+            - desc: 提供企业级用户服务支持体系，帮助用户快速使用并与我们一起成长。
+          children:
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: 
+        - $formkit: text
+          if: "$get(show_about).value"
+          name: header_summary
+          label: 顶部总结
+          value: 我们的愿景是成为世界一流的Saas软件服务提供商，与用户一起热爱一起成长！  
+        - $formkit: repeater
+          if: "$get(show_about).value"
+          name: header_num_items
+          label: 数字展示条目
+          help: 支持被12整除的数量，移动端每行只显示2个，所以最好的数量是2/4
+          value: 
+            - name: 产品
+              num: 6
+            - name: 成员人数
+              num: 360
+            - name: 办公地址
+              num: 18
+            - name: 客户数量
+              num: 10000     
+          children:
+            - $formkit: text
+              name: name
+              label: 名称
+              value:
+            - $formkit: text
+              name: num
+              label: 数量
+              value: 
+        - $formkit: text
+          if: "$get(show_about).value"
+          name: bar_chart_title
+          label: 柱形图标题
+          value: 我们的优势
+        - $formkit: text
+          if: "$get(show_about).value"
+          name: bar_chart_desc
+          label: 柱形图描述
+          value: 我们在不同软件服务领域的市场占有率
+        - $formkit: repeater
+          if: "$get(show_about).value"
+          name: bar_chart_items
+          label: 柱形图条目
+          value: 
+            - name: 云服务
+              percent: 30
+              color: '#8e2abd'
+            - name: 安全运维审计
+              percent: 75
+              color: '#4f9a57'
+            - name: 数据可视化
+              percent: 36
+              color: '#c02756'
+            - name: 自动化测试
+              percent: 88  
+              color: '#c05c27'
+            - name: 零代码建站
+              percent: 100  
+              color: '#1717dc'
+          children:
+            - $formkit: text
+              name: name
+              label: 名称
+            - $formkit: text
+              name: percent
+              label: 百分比
+              help: 不能超过100
+            - $formkit: color
+              name: color
+              label: 颜色 
+        - $formkit: text
+          if: "$get(show_about).value"
+          name: carousel_title
+          label: 轮播标题
+          value: 用户评价
+        - $formkit: text
+          if: "$get(show_about).value"
+          name: carousel_desc
+          label: 轮播描述
+          value: 感谢广大用户给我们提出的宝贵建议与高度认可。
+        - $formkit: repeater
+          if: "$get(show_about).value"
+          name: carousel_items
+          label: 轮播条目
+          value: 
+            - avatar: /themes/moderna-template/assets/img/team/team-2.jpg
+              name: 马某
+              location: 某五百强首席执行官
+              content: 感谢为世界软件事业发展做出的重大贡献。
+            - avatar: /themes/moderna-template/assets/img/team/team-2.jpg
+              name: 李某
+              location: 金牌合作伙伴
+              content: 很开心能与贵司合作达成双赢。
+            - avatar: /themes/moderna-template/assets/img/team/team-2.jpg
+              name: 马某
+              location: 首席产品经理
+              content: 产品不错，给用户很好的使用体检。继续加油！
+            - avatar: /themes/moderna-template/assets/img/team/team-2.jpg
+              name: 王某
+              location: 首席铲屎官
+              content: 我是世界第一帅，你们是世界第一棒！      
+          children:
+            - $formkit: attachment
+              name: avatar
+              label: 头像
+            - $formkit: text
+              name: name
+              label: 名称
+            - $formkit: text
+              name: location
+              label: 职位
+            - $formkit: text
+              name: content
+              label: 内容    
+    - group: service
+      label: 服务
+      formSchema:
+        - $formkit: radio
+          help: 这个主要是用服务那个自定义模版下面的配置注意啦
+          name: show
+          id: show_service
+          key: show_service
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false 
+          label: 是否显示
+          value: false
+        - $formkit: singlePageSelect
+          if: "$get(show_service).value"
+          name: page
+          label: 选择自定义界面
+          validation: "required"
+          value: 
+          help: 必须选择服务模版的自定义页面,否则下面的配置将会失效。
+        - $formkit: radio
+          if: "$get(show_service).value"
+          name: show_service
+          id: show_service_key
+          key: show_service_key
+          label: 显示文化
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false  
+        - $formkit: repeater
+          if: "$get(show_service).value && $get(show_service_key).value"
+          name: service_items
+          id: service_items
+          key: service_items
+          label: 企业文化
+          help: 建议2/4个数据否则会导致排版出现问题
+          value: 
+            - icon: bxl-dribbble
+              title: 平等
+              desc: 公司是我们共同的老板
+            - icon: bx-file
+              title: 价值
+              desc: 软件用起来才有价值，才有改进的机会
+            - icon: bx-tachometer
+              title: 求真
+              desc: 不断求真，坚持有所不为有所为
+            - icon: bx-world
+              title: 担当
+              desc: 做问题的终结者，而不是转发者和抱怨者  
+          children:
+            - $formkit: text
+              name: icon
+              label: 图标
+              help: 选择boxicons的icon样式
+              value: ""
+            - $formkit: text
+              name: title
+              label: 标题
+              value: ""
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: ""
+        - $formkit: radio
+          if: "$get(show_service).value"
+          name: show_why_us
+          id: show_service_why_us
+          key: show_service_why_us
+          label: 显示介绍
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: attachment
+          if: "$get(show_service).value && $get(show_service_why_us).value"
+          name: why_bg_img
+          label: 介绍背景图片
+          value: /themes/moderna-template/assets/img/why-us.jpg
+        - $formkit: url
+          if: "$get(show_service).value && $get(show_service_why_us).value"
+          name: why_video_url
+          label: 视频地址
+          value: 
+        - $formkit: repeater
+          if: "$get(show_service).value && $get(show_service_why_us).value"
+          name: why_us_items
+          label: 介绍条目
+          value: 
+            - icon: bx-fingerprint
+              title: 核心价值观
+              desc: 软件用起来才有价值，才有改进的机会！
+            - icon: bx-world
+              title: 加入我们
+              desc: 为数字经济时代创造好软件，一起改变世界！
+          children:
+            - $formkit: text
+              name: icon
+              label: 图标
+              value: 
+              help: 选择boxicons的icon样式
+            - $formkit: text
+              name: title
+              label: 标题
+              value: 
+            - $formkit: text
+              name: desc
+              label: 描述
+              value:
+        - $formkit: radio
+          if: "$get(show_service).value"
+          name: show_card
+          id: show_service_card
+          key: show_service_card
+          label: 显示卡片
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: repeater
+          if: "$get(show_service).value && $get(show_service_card).value"
+          name: card_itmes
+          id: card_itmes
+          key: card_itmes
+          label: 卡片信息
+          value: 
+            - img: /themes/moderna-template/assets/img/card-1.jpg
+              title: MeterSphere
+              desc: MeterSphere 是一站式的开源持续测试平台，遵循 GPL v3 开源许可协议，涵盖测试跟踪、接口测试、UI 测试和性能测试等功能，全面兼容 JMeter、Selenium 等主流开源标准，有效助力开发和测试团队充分利用云弹性进行高度可扩展的自动化测试，加速高质量的软件交付。
+              url: https://metersphere.io
+            - img: /themes/moderna-template/assets/img/card-2.jpg
+              title: DataEase
+              desc: DataEase 是开源的数据可视化分析工具，帮助用户快速分析数据并洞察业务趋势，从而实现业务的改进与优化。DataEase 支持丰富的数据源连接，能够通过拖拉拽方式快速制作图表，并可以方便地与他人分享。
+              url: https://dataease.io
+            - img: /themes/moderna-template/assets/img/card-3.jpg
+              title: JumpServer
+              desc: JumpServer 是广受欢迎的开源堡垒机，是符合 4A 规范的专业运维安全审计系统。改变世界，从一点点开始。
+              url: https://www.jumpserver.org
+            - img: /themes/moderna-template/assets/img/card-4.jpg
+              title: KubeOperator
+              desc: KubeOperator 是一个开源的轻量级 Kubernetes 发行版，专注于帮助企业规划、部署和运营生产级别的 Kubernetes 集群。
+              url: https://kubeoperator.io    
+          children:
+            - $formkit: attachment
+              name: img
+              label: 图片
+              value:
+            - $formkit: text
+              name: title
+              label: 标题
+              value: 
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: 
+            - $formkit: url
+              name: url
+              label: 跳转地址
+              value:
+        - $formkit: radio
+          if: "$get(show_service).value"
+          name: show_price
+          id: show_service_price
+          key: show_service_price
+          label: 显示价格
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: text
+          if: "$get(show_service).value && $get(show_service_price).value"
+          name: price_desc
+          label: 价格描述
+          value: 诚信经营，童叟无欺！
+        - $formkit: repeater
+          if: "$get(show_service).value && $get(show_service_price).value"
+          name: price_items
+          label: 价格条目
+          help: 默认只能三个
+          value: 
+            - name: 免费版
+              num: ¥0 /月
+              desc: '<li><i class="bx bx-check"></i> 基本功能 </li>
+              <li><i class="bx bx-check"></i> 多租户管理 </li>
+              <li><i class="bx bx-check"></i> 工作台 </li>
+              <li class="na"><i class="bx bx-x"></i> <span>企业认证集成</span></li>
+              <li class="na"><i class="bx bx-x"></i> <span>商业功能</span></li>'
+              btn_name: 免费试用
+              btn_url: /
+            - name: 商业版
+              num: ¥800 /月
+              desc: '<li><i class="bx bx-check"></i> 基本功能</li>
+              <li><i class="bx bx-check"></i> 多租户管理</li>
+              <li><i class="bx bx-check"></i> 工作台</li>
+              <li><i class="bx bx-check"></i> 企业认证集成</li>
+              <li><i class="bx bx-check"></i> 商业功能</li>'
+              btn_name: 立即购买
+              btn_url: / 
+            - name: 旗舰版
+              num: ¥1200 /月
+              desc: '<li><i class="bx bx-check"></i> 基本功能</li>
+              <li><i class="bx bx-check"></i> 多租户管理</li>
+              <li><i class="bx bx-check"></i> 工作台</li>
+              <li><i class="bx bx-check"></i> 企业认证集成</li>
+              <li><i class="bx bx-check"></i> 商业功能</li>
+              <li><i class="bx bx-check"></i> 专属客服支持</li>'
+              btn_name: 立即购买
+              btn_url: /  
+          children:
+            - $formkit: text
+              name: name
+              label: 名称
+              value: ""
+            - $formkit: text
+              name: num
+              label: 价格
+              help: 如 ¥1200 /月
+              value: "" 
+            - $formkit: code
+              name: desc
+              label: 描述
+              value: ""
+            - $formkit: text
+              name: btn_name
+              label: 按钮名称
+              value: ""
+            - $formkit: text
+              name: btn_url
+              label: 跳转地址
+              value: ""       
+    - group: team
+      label: 团队
+      formSchema:
+        - $formkit: radio
+          help: 这个主要是用团队那个自定义模版下面的配置注意啦
+          name: show
+          id: show_team
+          key: show_team
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false 
+          label: 是否显示
+          value: false
+        - $formkit: singlePageSelect
+          if: "$get(show_team).value"
+          name: page
+          label: 选择自定义界面
+          validation: "required"
+          value: 
+          help: 必须选择团队模版的自定义页面,否则下面的配置将会失效。
+        - $formkit: repeater
+          if: "$get(show_team).value"
+          name: items
+          label: 成员列表
+          value: 
+            - photo: /themes/moderna-template/assets/img/team/team-2.jpg
+              name: 王某
+              localtion: 首席铲屎官
+              desc: 作为公司最帅的标杆就是需要有足够的闷骚才能男女通杀！
+              social: '<a href="/"><i class="iconfont icon-zhihu"></i></a>
+                  <a href="/"><i class="iconfont icon-weibo"></i></a>
+                  <a href="/"><i class="iconfont icon-qq"></i></a>
+                  <a href="/"><i class="iconfont icon-weixin"></i></a>'
+            - photo: /themes/moderna-template/assets/img/team/team-2.jpg
+              name: 刘某
+              localtion: IT 民工
+              desc: 矜矜业业，为软件事业每天付出24小时！
+              social: '<a href="/"><i class="iconfont icon-zhihu"></i></a>
+                  <a href="/"><i class="iconfont icon-weibo"></i></a>
+                  <a href="/"><i class="iconfont icon-qq"></i></a>
+                  <a href="/"><i class="iconfont icon-weixin"></i></a>'
+            - photo: /themes/moderna-template/assets/img/team/team-2.jpg
+              name: 兰某某
+              localtion: 首席架构师
+              desc: 不要问，问就是什么都懂！
+              social: '<a href="/"><i class="iconfont icon-zhihu"></i></a>
+                  <a href="/"><i class="iconfont icon-weibo"></i></a>
+                  <a href="/"><i class="iconfont icon-qq"></i></a>
+                  <a href="/"><i class="iconfont icon-weixin"></i></a>'            
+          children:
+            - $formkit: attachment
+              name: photo
+              label: 照片
+              value: ""
+            - $formkit: text
+              name: name
+              label: 名称
+              value: ""
+            - $formkit: text
+              name: localtion
+              label: 职位
+              value: ""
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: ""
+            - $formkit: code
+              name: social
+              label: 社交
+              value: ""
+    - group: blog
+      label: 博客
+      formSchema:
+        - $formkit: radio
+          name: show
+          id: show_blog
+          key: show_blog
+          help: 必须是博客自定义模版下面的设置才有效
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false  
+          label: 是否显示
+          value: false
+        - $formkit: singlePageSelect
+          if: "$get(show_blog).value"
+          name: page
+          label: 选择自定义界面
+          validation: "required"
+          value: 
+          help: 必须选择博客模版的自定义页面,否则下面的配置将会失效。
+        - $formkit: number
+          if: "$get(show_blog).value"
+          name: page_num
+          label: 每页显示数量
+          validation: "required"
+          value: 6
+        - $formkit: text
+          if: "$get(show_blog).value"
+          name: cg_name
+          label: 分类显示名称
+          validation: "required"
+          value: 分类
+        - $formkit: text
+          if: "$get(show_blog).value"
+          name: tg_name
+          label: 标签显示名称
+          validation: "required"
+          value: 标签
+        - $formkit: text
+          if: "$get(show_blog).value"
+          name: new_it_name
+          label: 最新条目显示名称
+          validation: "required"
+          value: 最新发布
+        - $formkit: number
+          if: "$get(show_blog).value"
+          name: new_it_num
+          label: 最新条目显示数量
+          validation: "required"
+          value: 6       
+    - group: contact
+      label: 联系我们
+      formSchema:
+        - $formkit: radio
+          name: show
+          id: show_contact
+          key: show_contact
+          help: 必须是联系我们自定义模版下面的设置才有效
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false  
+          label: 是否显示
+          value: false
+        - $formkit: singlePageSelect
+          if: "$get(show_contact).value"
+          name: page
+          label: 选择自定义界面
+          validation: "required"
+          value: 
+          help: 必须选择联系我们模版的自定义页面,否则下面的配置将会失效。  
+        - $formkit: text
+          if: "$get(show_contact).value"
+          name: address
+          label: 地址
+          value: 某某省某某市某某区某某路**号**********大厦某单元
+        - $formkit: email
+          if: "$get(show_contact).value"
+          name: email
+          label: 邮箱地址
+          value: support@xx.xx.com
+        - $formkit: tel
+          if: "$get(show_contact).value"
+          name: phone
+          label: 联系方式
+          value: +86 131 **** 0001
+        - $formkit: url
+          if: "$get(show_contact).value"
+          name: add_contact_url
+          label: 提交联系URL
+          value: http://www.myweb.com/add/contact
+        - $formkit: radio
+          if: "$get(show_contact).value"
+          name: show_map
+          id: show_contact_map
+          key: show_contact_map
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false  
+          label: 显示地图
+          value: false
+        - $formkit: url
+          if: "$get(show_contact).value && $get(show_contact_map).value"
+          name: map_url
+          label: 地图URL
+          value: ""
+    - group: common_style
+      label: 全局样式
+      formSchema:
+        - $formkit: code
+          name: import_code
+          help: 插入Header里面的css或者js
+          label: 头部引入代码
+          value: '<link href="//at.alicdn.com/t/c/font_2902222_l8a73x2m3c.css" rel="stylesheet">'
+        - $formkit: radio
+          name: show_menu
+          id: show_menu
+          key: show_menu
+          help: 是否显示菜单
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false  
+          label: 是否显示菜单
+          value: true
+        - $formkit: menuRadio
+          if: "$get(show_menu).value"
+          name: extra_menu
+          label: 额外菜单
+          help: 当前主题最多显示二级菜单,因为无法选中菜单所以只适合外链
+          value: ""
+        - $formkit: radio
+          name: show_footer_top
+          id: show_footer_top
+          key: show_footer_top
+          label: 显示底部外链块
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false  
+          value: true
+        - $formkit: menuRadio
+          if: "$get(show_footer_top).value"
+          name: first_menu
+          label: 第一链接
+          value: 
+        - $formkit: menuRadio
+          if: "$get(show_footer_top).value"
+          name: sec_menu
+          label: 第二链接
+          value:
+        - $formkit: text
+          if: "$get(show_footer_top).value"
+          name: third_title
+          label: 第三块标题
+          value: 联系我们
+        - $formkit: code
+          if: "$get(show_footer_top).value"
+          name: third_code
+          label: 第三块代码
+          value: '<p>
+                某某省某某市 <br>
+                某某区某某路<br>
+                某某大厦***号房 <br><br>
+                <strong>电话:</strong> +86 131****0008<br>
+                <strong>邮箱:</strong> support@**.**.com<br>
+              </p>'
+        - $formkit: text
+          if: "$get(show_footer_top).value"
+          name: four_title
+          label: 第四块标题
+          value: 关注我们
+        - $formkit: code
+          if: "$get(show_footer_top).value"
+          name: four_code
+          label: 第四块代码
+          value: '<p>Halo你值得拥有</p>
+            <div class="social-links mt-3">
+              <img style="max-height: 120px;" src="/themes/moderna-template/assets/img/wechat.jpg">
+            </div>'          
+        - $formkit: radio
+          name: show_copyright
+          id: show_copyright
+          key: show_copyright
+          label: 显示版权信息
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false  
+          value: true
+        - $formkit: code
+          if: "$get(show_copyright).value"
+          name: copyright
+          label: 版权代码
+          value: '<div class="copyright">
+                  &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                  Designed by <a href="https://bootstrapmade.com/">Moderna</a>
+                </div>'    

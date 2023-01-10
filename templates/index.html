@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{modules/import}" />
+
+<body>
+
+  <th:block th:replace="~{modules/header::goPage('home')}" />
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+      <!-- Slide 1 -->
+      <div th:each="cs,csStat:${theme.config.home.carousel}"
+        th:class="${csStat.index} == 0 ? 'carousel-item active' : 'carousel-item'">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown" th:text="${cs.title}"></h2>
+          <p class="animate__animated animate__fadeInUp" th:text="${cs.desc}"></p>
+          <a th:href="${cs.url}" class="btn-get-started animate__animated animate__fadeInUp">查看更多</a>
+        </div>
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+    <div id="hero-bg"
+      th:style="'background: linear-gradient(to right, rgba(30, 67, 86, 0.8), rgba(30, 67, 86, 0.6)), url('+${theme.config.home.carousel_bg_img}+') center top no-repeat;'" />
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Services Section ======= -->
+    <section class="services">
+      <div class="container">
+
+        <div class="row" th:with="srSize = ${#arrays.length(theme.config.home.service)}">
+          <div th:each="sr,srStat:${theme.config.home.service}"
+            th:class="'col-lg-'+ 12/${srSize} + ' col-md-6 d-flex align-items-stretch'"
+            th:data-aos-delay="${srStat.index}*100" data-aos="fade-up">
+            <div class="icon-box-pink icon-box">
+              <div class="icon"><i th:class="${sr.icon} + ' bx'"></i></div>
+              <h4 class="title" th:text="${sr.title}"></h4>
+              <p class="description" th:text="${sr.desc}"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Why Us Section ======= -->
+    <section class="why-us section-bg" th:if="${theme.config.home.show_why_us}" data-aos="fade-up" date-aos-delay="200">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6 video-box">
+            <img th:src="${theme.config.home.why_bg_img}" class="img-fluid" alt="">
+            <a th:if="${!#strings.isEmpty(theme.config.home.why_video_url)}"
+              th:href="${theme.config.home.why_video_url}" class="venobox play-btn mb-4" data-vbtype="video"
+              data-autoplay="true"></a>
+          </div>
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+
+            <div class="icon-box" th:each="it : ${theme.config.home.why_us_items}">
+              <div class="icon"><i th:class="${it.icon} + ' bx'"></i></div>
+              <h4 class="title" th:text="${it.title}"></h4>
+              <p class="description" th:text="${it.desc}"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= Features Section ======= -->
+    <section class="features" th:if="${theme.config.home.show_features}">
+      <div class="container">
+        <div class="section-title">
+          <h2 th:text="${theme.config.home.features_title}">优势</h2>
+          <p th:text="${theme.config.home.features_desc}">
+            我们有最强的团队，最佳的文化就可以在竞争中脱颖而出。因为优秀的团队和文化带来的是正确的战略，合理的架构，非凡的执行力和团结的凝聚力。</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" th:each="ft,ftState:${theme.config.home.features_items}">
+          <div th:class="${ftState.index} % 2 == 0 ? 'col-md-5 order-1 order-md-2' : 'col-md-5'">
+            <img th:src="${ft.img}" class="img-fluid" alt="">
+          </div>
+          <div th:class="${ftState.index} % 2 == 0 ? 'col-md-7 pt-5 order-2 order-md-1' : 'col-md-7 pt-4'">
+            <h3 th:text="${ft.title}"></h3>
+            <p class="fst-italic" th:text="${ft.desc}">
+            </p>
+            <ul>
+              <li th:each="it : ${ft.items}"><i class="bi bi-check"></i><span th:text="${it.desc}"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Features Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <th:block th:replace="~{modules/footer}" />
+  <!-- End Footer -->
+</body>
+
+</html>

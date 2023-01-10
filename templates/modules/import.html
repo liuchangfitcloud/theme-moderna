@@ -1,0 +1,32 @@
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title th:text="${site.title}"></title>
+  <!-- Favicons -->
+  <link th:if="${not #strings.isEmpty(site.logo)}" th:href="@{${site.logo}}" rel="icon">
+  <link th:if="${#strings.isEmpty(site.logo)}" th:href="@{/assets/img/favicon.png}" rel="icon">
+  <link th:if="${not #strings.isEmpty(site.logo)}" th:href="@{${site.logo}}" rel="apple-touch-icon">
+  <link th:if="${#strings.isEmpty(site.logo)}" th:href="@{/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+  <th:block th:if="${not #strings.isEmpty(theme.config.common_style.import_code)}">
+    [(${theme.config.common_style.import_code})]
+  </th:block>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap"
+    rel="stylesheet">
+  <!-- <link href="//at.alicdn.com/t/c/font_2902222_l8a73x2m3c.css" rel="stylesheet"> -->
+  <!-- <link th:utext="${theme.config.global.import_code}"></link> -->
+  <!-- Vendor CSS Files -->
+  <link th:href="@{/assets/vendor/animate.css/animate.min.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/aos/aos.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link th:href="@{/assets/css/style.css}" rel="stylesheet">
+</head>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{modules/import}" />
+
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <th:block th:replace="~{modules/header::goPage(${singlePage.spec.slug})}" />
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Our Team Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 th:text="${singlePage.spec.title}"></h2>
+          <ol>
+            <li><a href="/">首页</a></li>
+            <li th:text="${singlePage.spec.title}"></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Our Team Section -->
+
+    <!-- ======= Team Section ======= -->
+    <section class="team" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" th:each="it : ${theme.config.team.items}">
+            <div class="member">
+              <div class="member-img">
+                <img th:src="@{${it.photo}}" class="img-max-height" alt="">
+                <div class="social" th:utext="${it.social}">
+
+                </div>
+              </div>
+              <div class="member-info">
+                <h4 th:text="${it.name}"></h4>
+                <span th:text="${it.localtion}"></span>
+                <p th:text="${it.desc}"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <th:block th:replace="~{modules/footer}" />
+  <!-- End Footer -->
+</body>
+
+</html>

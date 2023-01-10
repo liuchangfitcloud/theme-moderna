@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{modules/import}" />
+
+<body>
+  <th:block th:replace="~{modules/header::goPage('about')}" />
+  <main id="main" style="min-height:400px;">
+    <article th:utext="${singlePage.content.content}"></article>
+  </main>
+  <th:block th:replace="~{modules/footer}" />
+</body>
+
+</html>

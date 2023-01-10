@@ -1,0 +1,62 @@
+<!-- <footer id="footer" data-aos="zoom-out" data-aos-easing="ease-in" data-aos-duration="50"> -->
+<footer id="footer">
+  <div class="footer-top" th:if="${theme.config.common_style.show_footer_top}">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6 footer-links"
+          th:if="not ${#strings.isEmpty(theme.config.common_style.first_menu)}">
+          <th:block th:with="menu=${menuFinder.getByName(theme.config.common_style.first_menu)}">
+            <h4 th:text="${menu.spec.displayName}"></h4>
+            <ul>
+              <li th:each="it : ${menu.menuItems}"><i class="bx bx-chevron-right"></i> <a th:href="@{${it.status.href}}"
+                  th:text="${it.status.displayName}">首页</a></li>
+            </ul>
+          </th:block>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links" th:if="not ${#strings.isEmpty(theme.config.common_style.sec_menu)}">
+          <th:block th:with="menu=${menuFinder.getByName(theme.config.common_style.sec_menu)}">
+            <h4 th:text="${menu.spec.displayName}"></h4>
+            <ul>
+              <li th:each="it : ${menu.menuItems}"><i class="bx bx-chevron-right"></i> <a th:href="@{${it.status.href}}"
+                  th:text="${it.status.displayName}">首页</a></li>
+            </ul>
+          </th:block>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-contact">
+          <h4 th:text="${theme.config.common_style.third_title}"></h4>
+          <th:block th:utext="${theme.config.common_style.third_code}">
+          </th:block>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-info">
+          <h3 th:text="${theme.config.common_style.four_title}"></h3>
+          <th:block th:utext="${theme.config.common_style.four_code}">
+          </th:block>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container" th:if="${theme.config.common_style.show_copyright}"
+    th:utext="${theme.config.common_style.copyright}">
+  </div>
+</footer>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/waypoints/noframework.waypoints.js}"></script>
+<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/assets/js/main.js}"></script>

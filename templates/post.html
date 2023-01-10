@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{modules/import}" />
+
+<body>
+
+    <th:block th:with="blog = ${singlePageFinder.getByName(theme.config.blog.page)}">
+        <th:block th:replace="~{modules/header::goPage(${blog.spec.slug})}"/>
+      </th:block>  
+
+  <main id="main" th:with="blog = ${singlePageFinder.getByName(theme.config.blog.page)}">
+
+    <!-- ======= Blog Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 th:text="${blog.spec.title}"></h2>
+
+          <ol>
+            <li><a href="/">首页</a></li>
+            <li><a th:href="@{'/' + ${blog.spec.slug}}" th:text="${blog.spec.title}"></a></li>
+            <li th:text="${post.spec.title}"></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img th:src="@{${post.spec.cover}}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <span th:text="${post.spec.title}"></span>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center">
+                    <i class="bi bi-person"></i> 
+                    <span th:text="${post.spec.owner}"></span>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <i class="bi bi-clock"></i> 
+                    <time datetime="2020-01-01" th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}"></time>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <!-- <i class="bi bi-chat-dots"></i> 
+                    <span th:text="${post.stats.comment} + ' 回复'"></span> -->
+                    <i class="bi bi-person-plus"></i>
+                    <span th:text="${post.stats.visit}"></span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <div th:utext="${post.content.content}"> </div>
+              </div>
+
+              <div class="entry-footer">
+                <i class="bi bi-folder"></i>
+                <ul class="cats">
+                  <li th:each="ca : ${post.categories}"><a th:href="@{${ca.status.permalink}}" th:text="${ca.spec.displayName}"></a></li>
+                </ul>
+
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                  <li th:each="tag : ${post.tags}"><a th:href="@{${tag.status.permalink}}" th:text="${tag.spec.displayName}"></a></li>
+                </ul>
+              </div>
+
+            </article><!-- End blog entry -->
+
+            <div class="blog-comments" style="display: none;">
+
+              <h4 class="comments-count" th:text="${post.stats.comment} + ' 条回复'"></h4>
+
+
+              <div id="comment-2" class="comment">
+                <div class="d-flex">
+                  <div class="comment-img"><img alt=""></div>
+                  <div>
+                    <h5><a href="">人物A</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> 回复</a></h5>
+                    <time datetime="2020-01-01">2020-01-01</time>
+                    <p>
+                       这是回复
+                    </p>
+                  </div>
+                </div>
+
+                <div id="comment-reply-1" class="comment comment-reply">
+                  <div class="d-flex">
+                    <div class="comment-img"><img alt=""></div>
+                    <div>
+                      <h5><a href="">人物B</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> 回复</a></h5>
+                      <time datetime="2020-01-01">2020-01-01</time>
+                      <p>
+                        我回复你了
+                      </p>
+                    </div>
+                  </div>
+
+                  <div id="comment-reply-2" class="comment comment-reply">
+                    <div class="d-flex">
+                      <div class="comment-img"><img alt=""></div>
+                      <div>
+                        <h5><a href="">人物A</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> 回复</a></h5>
+                        <time datetime="2020-01-01">2020-01-01</time>
+                        <p>
+                          回复已收到
+                        </p>
+                      </div>
+                    </div>
+                  </div><!-- End comment reply #2-->
+                </div><!-- End comment reply #1-->
+              </div><!-- End comment #2-->
+            </div><!-- End blog comments -->
+
+          </div><!-- End blog entries list -->
+
+          <th:block th:replace="~{modules/blog_right::selectTgOrCg ('','')}" />
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Single Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <th:block th:replace="~{modules/footer}" />
+  <!-- End Footer -->
+
+</body>
+
+</html>

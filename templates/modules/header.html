@@ -1,0 +1,51 @@
+<header id="header" th:fragment="goPage(page)"
+  th:class="${page =='home'} ? 'fixed-top d-flex align-items-center header-transparent' : 'fixed-top d-flex align-items-center' ">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="logo">
+      <h1 class="text-light"><a href="/"><span th:text="${site.title}"></span></a></h1>
+    </div>
+    <nav id="navbar" class="navbar" th:if="${theme.config.common_style.show_menu}">
+      <ul>
+        <li><a th:class="${page=='home'} ? 'active' : '' " href="/">首页</a></li>
+        <li><a th:if="${theme.config.about.show}"
+            th:with="about = ${singlePageFinder.getByName(theme.config.about.page)}"
+            th:class="${page==about.spec.slug} ? 'active' : '' " th:href="@{'/' + ${about.spec.slug}}"
+            th:text="${about.spec.title}"></a></li>
+        <li><a th:if="${theme.config.service.show}"
+            th:with="service = ${singlePageFinder.getByName(theme.config.service.page)}"
+            th:class="${page==service.spec.slug} ? 'active' : '' " th:href="@{'/' + ${service.spec.slug}}"
+            th:text="${service.spec.title}"></a></li>
+        <li><a th:if="${theme.config.team.show}" th:with="team = ${singlePageFinder.getByName(theme.config.team.page)}"
+            th:class="${page==team.spec.slug} ? 'active' : '' " th:href="@{'/' + ${team.spec.slug}}"
+            th:text="${team.spec.title}"></a></li>
+        <li><a th:if="${theme.config.blog.show}"
+            th:with="blog = ${singlePageFinder.getByName(theme.config.blog.page)}"
+            th:class="${page==blog.spec.slug} ? 'active' : '' " th:href="@{'/' + ${blog.spec.slug}}"
+            th:text="${blog.spec.title}"></a></li>
+        <li><a th:if="${theme.config.contact.show}"
+            th:with="contact = ${singlePageFinder.getByName(theme.config.contact.page)}"
+            th:class="${page==contact.spec.slug} ? 'active' : '' " th:href="@{'/' + ${contact.spec.slug}}"
+            th:text="${contact.spec.title}"></a></li>
+        <th:block th:if="${not #strings.isEmpty(theme.config.common_style.extra_menu)}"
+          th:with="menus=${menuFinder.getByName(theme.config.common_style.extra_menu)}">
+          <li th:each="menu : ${menus.menuItems}" th:class="${#arrays.isEmpty(menu.spec.children)} ? '' : 'dropdown'">
+            <a th:if="${#arrays.isEmpty(menu.spec.children)}" target="_blank" th:href="@{${menu.status.href}}"
+              th:text="${menu.status.displayName}"></a>
+            <th:block th:if="${not #arrays.isEmpty(menu.spec.children)}">
+              <a href="#">
+                <span th:text="${menu.spec.displayName}"></span>
+                <i class="bi bi-chevron-down"></i>
+              </a>
+              <ul>
+                <th:block th:each="child : ${menu.children}">
+                  <li><a th:href="${child.status.href}" target="_blank" th:text="${child.status.displayName}"></a></li>
+                </th:block>
+              </ul>
+            </th:block>
+          </li>
+        </th:block>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+  </div>
+</header>

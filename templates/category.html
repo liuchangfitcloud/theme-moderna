@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{modules/import}" />
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <th:block th:with="blog = ${singlePageFinder.getByName(theme.config.blog.page)}">
+    <th:block th:replace="~{modules/header::goPage(${blog.spec.slug})}"/>
+  </th:block>
+  <!-- End Header -->
+
+  <main id="main" th:with="blog = ${singlePageFinder.getByName(theme.config.blog.page)}">
+
+    <!-- ======= Blog Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 th:text="${blog.spec.title}"></h2>
+          <ol>
+            <li><a href="/">首页</a></li>
+            <li th:text="${blog.spec.title}"></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog" th:with="_idx = (${#strings.isEmpty(param._idx)} ? 1 : ${param._idx})">
+      <div class="container" data-aos="fade-up">
+        <!-- <span th:text="${category}"></span> -->
+        <div class="row">
+          <div class="col-lg-8 entries" th:with="posts = ${postFinder.listByCategory(_idx,theme.config.blog.page_num,category.metadata.name)}">
+            <article class="entry" th:each="post : ${posts.items}">
+              <div class="entry-img">
+                <img alt="" th:src="@{${post.spec.cover}}" class="img-fluid">
+              </div>
+              <h2 class="entry-title">
+                <a th:href="@{${post.status.permalink}}" th:text="${post.spec.title}"></a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center">
+                    <i class="bi bi-person"></i>
+                    <a th:href="@{${post.status.permalink}}" th:text="${post.spec.owner}"></a>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <i class="bi bi-clock"></i> 
+                    <a th:href="@{${post.status.permalink}}">
+                      <time datetime="2020-01-01" th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}"></time>
+                    </a>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <!-- <i class="bi bi-chat-dots"></i>
+                     <a th:href="@{${post.status.permalink}}" th:text="${post.stats.comment} + ' 回复'"></a> -->
+                    <i class="bi bi-person-plus"></i>
+                    <a th:href="@{${post.status.permalink}}" th:text="${post.stats.visit}"></a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p th:text="${post.status.excerpt}">
+                </p>
+                <div class="read-more">
+                  <a th:href="@{${post.status.permalink}}">查看更多</a>
+                </div>
+              </div>
+            </article><!-- End blog entry -->
+
+            <div class="blog-pagination" th:if="${posts.total} != 0" th:with="p=${#numbers.formatDecimal(posts.total/posts.size,0,0)}">
+              <ul class="justify-content-center" th:with="pt=${posts.total}%${posts.size} ==0 ? ${p} : ${p}+1">
+                <li th:each="i:${#numbers.sequence(1, pt)}" th:class="${i+'' == _idx+''} ? 'active' : ''">
+                  <a th:if="${i} == 1" th:href="@{${category.status.permalink}}" th:text="${i}"></a>
+                  <a th:unless="${i} == 1" th:href="@{${category.status.permalink}+'?_idx='+${i}}" th:text="${i}"></a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- End blog entries list -->
+
+          <th:block th:replace="~{modules/blog_right::selectTgOrCg('',${category.spec.displayName})}" />
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <th:block th:replace="~{modules/footer}" />
+  <!-- End Footer -->
+</body>
+
+</html>

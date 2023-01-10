@@ -22,4 +22,6 @@
 预览地址:
 http://47.107.123.38:8090/
 
+如有版权问题请联系 liuchang.cloud@gmail.com进行修改
+
 主题开发参考 [Halo官方文档](https://docs.halo.run)

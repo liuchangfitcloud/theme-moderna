@@ -19,4 +19,7 @@
 
 ![img_1.png](img_1.png)
 
+预览地址:
+http://47.107.123.38:8090/
+
 主题开发参考 [Halo官方文档](https://docs.halo.run)

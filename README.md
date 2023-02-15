@@ -20,7 +20,7 @@
 ![img_1.png](img_1.png)
 
 预览地址:
-http://47.107.123.38:8090/
+http://43.139.145.27/
 
 如有版权问题请联系 liuchang.cloud@gmail.com进行修改
 

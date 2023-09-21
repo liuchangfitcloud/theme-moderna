@@ -3,37 +3,37 @@ kind: Theme
 metadata:
   name: moderna-template
 spec:
-  displayName: Moderna template
+  displayName: Moderna
   author:
     name: shrChang.Liu
-    website: "https://halo.run"
+    website: "https://github.com/liuchangfitcloud"
   description: Moderna html5 template for Halo
   logo: "/themes/moderna-template/assets/img/favicon.png"
   website: "https://halo.run"
-  repo: "https://github.com/halo-sigs/theme-starter"
+  repo: "https://github.com/liuchangfitcloud/theme-moderna"
   settingName: "theme-moderna-setting"
   configMapName: "theme-moderna-configMap"
-  version: "1.0"
-  require: "*"
+  version: "1.0.0"
+  require: ">=2.0.0"
   customTemplates:
     page:
       - name: 关于我们
         description: 关于我们
-        screenshot: 
+        screenshot:
         file: about.html
       - name: 服务
         description: 服务
-        screenshot: 
+        screenshot:
         file: services.html
       - name: 团队
         description: 团队
-        screenshot: 
+        screenshot:
         file: team.html
       - name: 联系我们
         description: 联系我们
-        screenshot: 
+        screenshot:
         file: contact.html
       - name: 博客
         description: 博客
-        screenshot: 
-        file: blog.html  
+        screenshot:
+        file: blog.html

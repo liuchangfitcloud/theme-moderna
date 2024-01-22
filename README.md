@@ -20,7 +20,7 @@
 ![img_1.png](img_1.png)
 
 预览地址:
-http://43.139.145.27/
+https://www.wggznb.top/?preview-theme=moderna-template
 
 如有版权问题请联系 liuchang.cloud@gmail.com进行修改
 

@@ -611,6 +611,246 @@ spec:
               name: btn_url
               label: 跳转地址
               value: ""       
+    - group: service1
+      label: 服务1
+      formSchema:
+        - $formkit: radio
+          help: 这个主要是用服务那个自定义模版下面的配置注意啦
+          name: show
+          id: show_service
+          key: show_service
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false 
+          label: 是否显示
+          value: false
+        - $formkit: singlePageSelect
+          if: "$get(show_service).value"
+          name: page
+          label: 选择自定义界面
+          validation: "required"
+          value: 
+          help: 必须选择服务模版的自定义页面,否则下面的配置将会失效。
+        - $formkit: radio
+          if: "$get(show_service).value"
+          name: show_service
+          id: show_service_key
+          key: show_service_key
+          label: 显示文化
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false  
+        - $formkit: repeater
+          if: "$get(show_service).value && $get(show_service_key).value"
+          name: service_items
+          id: service_items
+          key: service_items
+          label: 企业文化
+          help: 建议2/4个数据否则会导致排版出现问题
+          value: 
+            - icon: bxl-dribbble
+              title: 平等
+              desc: 公司是我们共同的老板
+            - icon: bx-file
+              title: 价值
+              desc: 软件用起来才有价值，才有改进的机会
+            - icon: bx-tachometer
+              title: 求真
+              desc: 不断求真，坚持有所不为有所为
+            - icon: bx-world
+              title: 担当
+              desc: 做问题的终结者，而不是转发者和抱怨者  
+          children:
+            - $formkit: text
+              name: icon
+              label: 图标
+              help: 选择boxicons的icon样式
+              value: ""
+            - $formkit: text
+              name: title
+              label: 标题
+              value: ""
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: ""
+        - $formkit: radio
+          if: "$get(show_service).value"
+          name: show_why_us
+          id: show_service_why_us
+          key: show_service_why_us
+          label: 显示介绍
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: attachment
+          if: "$get(show_service).value && $get(show_service_why_us).value"
+          name: why_bg_img
+          label: 介绍背景图片
+          value: /themes/moderna-template/assets/img/why-us.jpg
+        - $formkit: url
+          if: "$get(show_service).value && $get(show_service_why_us).value"
+          name: why_video_url
+          label: 视频地址
+          value: 
+        - $formkit: repeater
+          if: "$get(show_service).value && $get(show_service_why_us).value"
+          name: why_us_items
+          label: 介绍条目
+          value: 
+            - icon: bx-fingerprint
+              title: 核心价值观
+              desc: 软件用起来才有价值，才有改进的机会！
+            - icon: bx-world
+              title: 加入我们
+              desc: 为数字经济时代创造好软件，一起改变世界！
+          children:
+            - $formkit: text
+              name: icon
+              label: 图标
+              value: 
+              help: 选择boxicons的icon样式
+            - $formkit: text
+              name: title
+              label: 标题
+              value: 
+            - $formkit: text
+              name: desc
+              label: 描述
+              value:
+        - $formkit: radio
+          if: "$get(show_service).value"
+          name: show_card
+          id: show_service_card
+          key: show_service_card
+          label: 显示卡片
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: repeater
+          if: "$get(show_service).value && $get(show_service_card).value"
+          name: card_itmes
+          id: card_itmes
+          key: card_itmes
+          label: 卡片信息
+          value: 
+            - img: /themes/moderna-template/assets/img/card-1.jpg
+              title: MeterSphere
+              desc: MeterSphere 是一站式的开源持续测试平台，遵循 GPL v3 开源许可协议，涵盖测试跟踪、接口测试、UI 测试和性能测试等功能，全面兼容 JMeter、Selenium 等主流开源标准，有效助力开发和测试团队充分利用云弹性进行高度可扩展的自动化测试，加速高质量的软件交付。
+              url: https://metersphere.io
+            - img: /themes/moderna-template/assets/img/card-2.jpg
+              title: DataEase
+              desc: DataEase 是开源的数据可视化分析工具，帮助用户快速分析数据并洞察业务趋势，从而实现业务的改进与优化。DataEase 支持丰富的数据源连接，能够通过拖拉拽方式快速制作图表，并可以方便地与他人分享。
+              url: https://dataease.io
+            - img: /themes/moderna-template/assets/img/card-3.jpg
+              title: JumpServer
+              desc: JumpServer 是广受欢迎的开源堡垒机，是符合 4A 规范的专业运维安全审计系统。改变世界，从一点点开始。
+              url: https://www.jumpserver.org
+            - img: /themes/moderna-template/assets/img/card-4.jpg
+              title: KubeOperator
+              desc: KubeOperator 是一个开源的轻量级 Kubernetes 发行版，专注于帮助企业规划、部署和运营生产级别的 Kubernetes 集群。
+              url: https://kubeoperator.io    
+          children:
+            - $formkit: attachment
+              name: img
+              label: 图片
+              value:
+            - $formkit: text
+              name: title
+              label: 标题
+              value: 
+            - $formkit: text
+              name: desc
+              label: 描述
+              value: 
+            - $formkit: url
+              name: url
+              label: 跳转地址
+              value:
+        - $formkit: radio
+          if: "$get(show_service).value"
+          name: show_price
+          id: show_service_price
+          key: show_service_price
+          label: 显示价格
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: text
+          if: "$get(show_service).value && $get(show_service_price).value"
+          name: price_desc
+          label: 价格描述
+          value: 诚信经营，童叟无欺！
+        - $formkit: repeater
+          if: "$get(show_service).value && $get(show_service_price).value"
+          name: price_items
+          label: 价格条目
+          help: 默认只能三个
+          value: 
+            - name: 免费版
+              num: ¥0 /月
+              desc: '<li><i class="bx bx-check"></i> 基本功能 </li>
+              <li><i class="bx bx-check"></i> 多租户管理 </li>
+              <li><i class="bx bx-check"></i> 工作台 </li>
+              <li class="na"><i class="bx bx-x"></i> <span>企业认证集成</span></li>
+              <li class="na"><i class="bx bx-x"></i> <span>商业功能</span></li>'
+              btn_name: 免费试用
+              btn_url: /
+            - name: 商业版
+              num: ¥800 /月
+              desc: '<li><i class="bx bx-check"></i> 基本功能</li>
+              <li><i class="bx bx-check"></i> 多租户管理</li>
+              <li><i class="bx bx-check"></i> 工作台</li>
+              <li><i class="bx bx-check"></i> 企业认证集成</li>
+              <li><i class="bx bx-check"></i> 商业功能</li>'
+              btn_name: 立即购买
+              btn_url: / 
+            - name: 旗舰版
+              num: ¥1200 /月
+              desc: '<li><i class="bx bx-check"></i> 基本功能</li>
+              <li><i class="bx bx-check"></i> 多租户管理</li>
+              <li><i class="bx bx-check"></i> 工作台</li>
+              <li><i class="bx bx-check"></i> 企业认证集成</li>
+              <li><i class="bx bx-check"></i> 商业功能</li>
+              <li><i class="bx bx-check"></i> 专属客服支持</li>'
+              btn_name: 立即购买
+              btn_url: /  
+          children:
+            - $formkit: text
+              name: name
+              label: 名称
+              value: ""
+            - $formkit: text
+              name: num
+              label: 价格
+              help: 如 ¥1200 /月
+              value: "" 
+            - $formkit: code
+              name: desc
+              label: 描述
+              value: ""
+            - $formkit: text
+              name: btn_name
+              label: 按钮名称
+              value: ""
+            - $formkit: text
+              name: btn_url
+              label: 跳转地址
+              value: ""       
     - group: team
       label: 团队
       formSchema:
